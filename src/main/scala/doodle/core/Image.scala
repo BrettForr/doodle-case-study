@@ -6,11 +6,9 @@ import doodle.backend.Canvas
   * Created by am_dev on 5/2/17.
   */
 sealed trait Image {
-  def on(that: Image): Image = ???
-
-  def beside(that: Image): Image = ???
-
-  def above(that: Image): Image = ???
+  def on(that: Image): Image = On(this, that)
+  def beside(that: Image): Image = Beside(this, that)
+  def above(that: Image): Image = Above(this, that)
 
   def boundingBox: BoundingBox = this match {
     case Circle(r) => BoundingBox(r, -r, -r, r)
