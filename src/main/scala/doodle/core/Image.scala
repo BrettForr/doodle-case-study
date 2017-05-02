@@ -1,0 +1,36 @@
+package doodle.core
+
+import doodle.backend.Canvas
+
+/**
+  * Created by am_dev on 5/2/17.
+  */
+sealed trait Image {
+  def on(that: Image): Image = ???
+
+  def beside(that: Image): Image = ???
+
+  def above(that: Image): Image = ???
+
+  def boundingBox: BoundingBox = this match {
+    case Circle(r) => BoundingBox(r, -r, -r, r)
+    case Rectangle(w, h) => BoundingBox(h/2, -h/2, -w/2, w/2)
+    case Above(t, b) => t.boundingBox above b.boundingBox
+    case Beside(l, r) => l.boundingBox beside r.boundingBox
+    case On(i, o) => i.boundingBox on o.boundingBox
+  }
+
+  def draw(canvas: Canvas): Unit = this match {
+    case Circle(r) => canvas.circle(0.0, 0.0, r)
+    case Rectangle(w, h) => canvas.rectangle(-w/2.0, h/2.0, w, h)
+    case Above(t, b) => ???
+    case Beside(l, r) => ???
+    case On(i, o) => ???
+  }
+
+}
+final case class Circle(radius: Double) extends Image
+final case class Rectangle(width: Double, height: Double) extends Image
+final case class Above(top: Image, bottom: Image) extends Image
+final case class Beside(left: Image, right: Image) extends Image
+final case class On(inner: Image, outer: Image) extends Image

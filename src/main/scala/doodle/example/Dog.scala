@@ -4,7 +4,7 @@ package example
 import doodle.core._
 import doodle.backend.Canvas
 
-object Dog {
+object Dog extends App {
    def draw(canvas: Canvas): Unit = {
     // The coordinates for this (upside down) dog in the style of Picasso comes
     // from a Jeremy Kun:
@@ -35,5 +35,6 @@ object Dog {
     canvas.setStroke(Stroke(3.0, Color.black, Line.Cap.Round, Line.Join.Round))
     canvas.stroke()
   }
+
  
 }
