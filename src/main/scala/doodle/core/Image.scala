@@ -18,9 +18,9 @@ sealed trait Image {
     case On(i, o) => i.boundingBox on o.boundingBox
   }
 
-  def draw(canvas: Canvas): Unit = this match {
-    case Circle(r) => canvas.circle(0.0, 0.0, r)
-    case Rectangle(w, h) => canvas.rectangle(-w/2.0, h/2.0, w, h)
+  def draw(canvas: Canvas, x: Double = 0.0, y: Double = 0.0): Unit = this match {
+    case Circle(r) => canvas.circle(x, y, r)
+    case Rectangle(w, h) => canvas.rectangle(-w/2.0 + x, h/2.0 + y, w, h)
     case Above(t, b) => ???
     case Beside(l, r) => ???
     case On(i, o) => ???
